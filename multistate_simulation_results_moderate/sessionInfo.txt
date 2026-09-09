@@ -1,0 +1,27 @@
+R version 4.4.2 (2024-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Rocky Linux 9.7 (Blue Onyx)
+
+Matrix products: default
+BLAS:   /opt/apps/el9-fix/apps/gcc/R/4.4.2/lib64/R/lib/libRblas.so 
+LAPACK: /opt/apps/el9-fix/apps/gcc/R/4.4.2/lib64/R/lib/libRlapack.so;  LAPACK version 3.12.0
+
+locale:
+ [1] LC_CTYPE=en_GB.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_GB.UTF-8        LC_COLLATE=en_GB.UTF-8    
+ [5] LC_MONETARY=en_GB.UTF-8    LC_MESSAGES=en_GB.UTF-8   
+ [7] LC_PAPER=en_GB.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_GB.UTF-8 LC_IDENTIFICATION=C       
+
+time zone: Europe/London
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] rjags_4-17    coda_0.19-4.1 MASS_7.3-61  
+
+loaded via a namespace (and not attached):
+[1] compiler_4.4.2 grid_4.4.2     lattice_0.22-6

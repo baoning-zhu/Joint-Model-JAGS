@@ -1,0 +1,36 @@
+
+model {
+  for (k in 1:K) {
+    lambda12[k] <- lambda012 * exp(gamma12 * x[k])
+    lambda13[k] <- lambda013 * exp(gamma13 * x[k])
+    lambda23[k] <- lambda023 * exp(gamma23 * x[k])
+
+    loglik_state1[k] <-
+      event12[k] * log(lambda12[k]) +
+      event13[k] * log(lambda13[k]) -
+      (lambda12[k] + lambda13[k]) * duration[k]
+
+    loglik_state2[k] <-
+      event23[k] * log(lambda23[k]) -
+      lambda23[k] * duration[k]
+
+    loglik[k] <- is_state1[k] * loglik_state1[k] +
+                 is_state2[k] * loglik_state2[k]
+
+    phi[k] <- -loglik[k] + C_zero
+    zeros[k] ~ dpois(phi[k])
+  }
+
+  log_lambda012 ~ dnorm(0, 1)
+  log_lambda013 ~ dnorm(0, 1)
+  log_lambda023 ~ dnorm(0, 1)
+
+  lambda012 <- exp(log_lambda012)
+  lambda013 <- exp(log_lambda013)
+  lambda023 <- exp(log_lambda023)
+
+  gamma12 ~ dnorm(0, 0.25)
+  gamma13 ~ dnorm(0, 0.25)
+  gamma23 ~ dnorm(0, 0.25)
+}
+
