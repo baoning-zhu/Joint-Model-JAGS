@@ -17,7 +17,7 @@ invisible(lapply(required_packages, library, character.only = TRUE))
 ############################################################
 # Use the actual input file name. Change this only if your raw
 # Stata file has a different name.
-DATA_FILE <- "new_dataset_noL 1(4).dta"
+DATA_FILE <- "new_dataset_noL 1.dta"
 OUT_DIR <- "ELSA_JOINT_MODEL_DATA_FINAL"
 
 ID_VAR <- "idauniq"
