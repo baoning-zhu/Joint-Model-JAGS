@@ -1,35 +1,4 @@
 ############################################################
-# ELSA JOINT MODEL DATA CONSTRUCTION - MODIFIED FINAL VERSION
-#
-# Longitudinal outcome: cflisd (Delayed recall)
-# Multistate states: 0 Non‑frail, 1 Pre‑frail, 2 Frail, 3 Death
-# Death variable: raxyear (year‑level death information)
-#
-# IMPORTANT MODIFICATIONS
-# 1. Death year is never treated as an exact death date.
-# 2. Same‑year death and frailty observations are treated as ambiguous
-#    and are audited rather than assigned an invented order.
-# 3. Frailty observations in the death year are not used as alive states.
-# 4. Observed frailty intervals are not allowed to cross a known death year.
-# 5. Death transitions are created only when death occurs strictly after
-#    the last observed alive frailty state and before the next frailty wave.
-# 6. For KM censoring, ralstcorey is used when available as the last
-#    completed core interview year; otherwise the last observed frailty year
-#    is used.
-# 7. Baseline deaths occurring in or before the baseline year are audited
-#    and excluded from KM analysis because ordering is not identifiable.
-# 8. Original age is preserved; reconstructed age is stored separately.
-#
-# === PATCHES APPLIED (fixed version) ===
-# PATCH‑1: global_baseline filter: exclude observations in death year
-# PATCH‑2: longitudinal_data filter: exclude observations in death year, align with multistate rule
-# PATCH‑3: km_data_raw add surv_time_zero flag for survival_time == 0 audit
-# PATCH‑4: add death_transition duplicate id check & warning file
-# PATCH‑5: console output for invalid_transitions count
-# PATCH‑6: console output for survival_time zero count
-############################################################
-
-############################################################
 # 0. PACKAGES
 ############################################################
 required_packages <- c(
