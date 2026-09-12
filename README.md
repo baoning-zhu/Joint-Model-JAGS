@@ -20,7 +20,6 @@ ERP-Additional-Materials/
 ├── Code/
 │   ├── data_preprocessing.R
 │   ├── ELSA_joint_model application.R
-│   ├── joint_shared_RE_model.jags
 │   ├── longitudinal.R
 │   ├── multistate_simulation_moderate_complete.R
 │   └── simulation_study.R
@@ -248,33 +247,11 @@ The full model is computationally intensive. The script also contains a smaller 
 
 ---
 
-## 7. JAGS model specification
-
-The repository also contains:
-
-```text
-Code/joint_shared_RE_model.jags
-```
-
-This provides the JAGS specification of the shared-random-effects joint model.
-
-The model contains:
-
-* longitudinal fixed effects;
-* subject-specific random intercepts and slopes;
-* the random-effects covariance structure;
-* transition-specific baseline intensities;
-* transition-specific covariate effects;
-* shared random-effect association parameters; and
-* Bayesian prior distributions.
-
----
-
-## 8. Simulation studies
+## 7. Simulation studies
 
 The repository contains three main simulation components.
 
-### 8.1 Joint-model simulation
+### 7.1 Joint-model simulation
 
 The principal simulation study is implemented in:
 
@@ -349,7 +326,7 @@ Simulation/joint_convergence_N500.csv
 
 ---
 
-### 8.2 Longitudinal simulation
+### 7.2 Longitudinal simulation
 
 The standalone longitudinal simulation is implemented in:
 
@@ -375,7 +352,7 @@ Simulation/longitudinal_simulation_results/
 
 ---
 
-### 8.3 Conventional multi-state simulation
+### 7.3 Conventional multi-state simulation
 
 The standalone multi-state simulation is implemented in:
 
@@ -403,7 +380,7 @@ Simulation/multistate_simulation_results_moderate/
 
 ---
 
-## 9. Results
+## 8. Results
 
 The `Results/` directory contains the main numerical outputs used to verify the ELSA analysis.
 
@@ -453,7 +430,7 @@ contains descriptive crude transition rates.
 
 ---
 
-## 10. Posterior results
+## 9. Posterior results
 
 ### MCMC diagnostics
 
@@ -503,7 +480,7 @@ contains posterior summaries for the transition-specific baseline intensities.
 
 ---
 
-## 11. Graphical outputs
+## 10. Graphical outputs
 
 The `Figures/` directory contains graphical outputs used to assess model convergence and present the multi-state results.
 
@@ -527,7 +504,7 @@ presents transition-specific hazard-ratio estimates and uncertainty intervals fo
 
 ---
 
-## 12. Suggested reproduction workflow
+## 11. Suggested reproduction workflow
 
 A researcher wishing to reproduce the analyses should use the following general workflow.
 
@@ -613,7 +590,7 @@ Their outputs can be compared with the corresponding subdirectories within `Simu
 
 ---
 
-## 13. Interpretation of the supplied materials
+## 12. Interpretation of the supplied materials
 
 The supplied outputs are intended to make it possible to verify whether the analyses have been reproduced successfully.
 
@@ -623,7 +600,7 @@ Some parameters, particularly those corresponding to less frequent transitions, 
 
 ---
 
-## 14. Reproducibility
+## 13. Reproducibility
 
 Random seeds are specified within the simulation and empirical analysis scripts.
 
@@ -640,7 +617,7 @@ The code, simulation outputs, posterior summaries, convergence diagnostics, and 
 
 ---
 
-## 15. Summary of materials
+## 14. Summary of materials
 
 The repository provides:
 
