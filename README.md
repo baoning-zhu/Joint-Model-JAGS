@@ -83,9 +83,9 @@ Some scripts check for missing R packages and install them automatically. JAGS i
 
 ---
 
-## 3. ELSA empirical application
+## 3. ELSA application
 
-The empirical analysis jointly investigates longitudinal cognitive performance and transitions between frailty states.
+The analysis jointly investigates longitudinal cognitive performance and transitions between frailty states.
 
 ### Longitudinal outcome
 
@@ -110,7 +110,7 @@ The four states are:
 
 Death is treated as an absorbing state.
 
-The final empirical model retains nine possible transitions:
+The final model retains nine possible transitions:
 
 ```text
 0 -> 1
@@ -158,7 +158,7 @@ Code/data_preprocessing.R
 The script currently expects a local Stata dataset named:
 
 ```text
-new_dataset_noL 1(4).dta
+new_dataset_noL 1.dta
 ```
 
 If the locally available dataset has a different name or location, the `DATA_FILE` setting at the beginning of the script should be changed accordingly.
@@ -344,7 +344,7 @@ The replication-level and summary outputs are provided in:
 ```text
 Simulation/simulation_results.csv
 Simulation/simulation_summary.csv
-Simulation/joint_convergence_N500(1).csv
+Simulation/joint_convergence_N500.csv
 ```
 
 ---
@@ -403,7 +403,7 @@ Simulation/multistate_simulation_results_moderate/
 
 ---
 
-## 9. Empirical results
+## 9. Results
 
 The `Results/` directory contains the main numerical outputs used to verify the ELSA analysis.
 
