@@ -48,10 +48,10 @@ ERP-Additional-Materials/
 └── Simulation/
     ├── simulation_results.csv
     ├── simulation_summary.csv
-    ├── joint_convergence_N500(1).csv
+    ├── joint_convergence_N500.csv
     ├── longitudinal_simulation_results/
     └── multistate_simulation_results_moderate/
-```
+
 
 The numbering of files in the `Results/` directory follows the numbering used in the original analysis pipeline. Intermediate files that are not required for interpretation or reproduction of the reported results are not included.
 
