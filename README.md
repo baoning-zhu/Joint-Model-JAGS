@@ -2,9 +2,9 @@
 
 ## Bayesian Joint Modelling of Longitudinal Outcomes and Multi-State Survival Processes
 
-This directory contains the computational materials accompanying the Extended Research Project on Bayesian joint modelling of longitudinal outcomes and multi-state survival processes.
+This repository contains the computational materials accompanying the Extended Research Project on Bayesian joint modelling of longitudinal outcomes and multi-state survival processes.
 
-The materials include the R and JAGS code used for data preprocessing, simulation studies, empirical model fitting, posterior inference, convergence assessment, and generation of the main numerical and graphical results.
+The materials include the R code used for data preprocessing, simulation studies, empirical model fitting, posterior inference, convergence assessment, and generation of the main numerical and graphical results. The Bayesian models are implemented using JAGS specifications embedded within the relevant R scripts.
 
 The empirical application uses data from the **English Longitudinal Study of Ageing (ELSA)**. The original ELSA data are not included in this repository because access and redistribution are subject to the relevant ELSA data-use conditions.
 
@@ -13,46 +13,48 @@ The empirical application uses data from the **English Longitudinal Study of Age
 ## 1. Repository structure
 
 ```text
-ERP-Additional-Materials/
+Joint-Model-JAGS/
 │
 ├── README.md
 │
-├── Code/
-│   ├── data_preprocessing.R
-│   ├── ELSA_joint_model application.R
-│   ├── longitudinal.R
-│   ├── multistate_simulation_moderate_complete.R
-│   └── simulation_study.R
-│
-├── Results/
-│   ├── 00_observed_transition_counts.csv
-│   ├── 01_subject_baseline_covariates_8cov.csv
-│   ├── 02_transition_retention_check.csv
-│   ├── 03_covariate_centering_constants.csv
-│   ├── 04_longitudinal_model_data.csv
-│   ├── 05_longitudinal_subject_audit.csv
-│   ├── 06_crude_transition_rates.csv
-│   ├── 07_convergence_Rhat_ESS.csv
-│   ├── 10_longitudinal_core_results.csv
-│   ├── 11_longitudinal_8cov_results.csv
-│   ├── 12_multistate_8cov_HR_results.csv
-│   ├── 13_joint_association_alpha_results.csv
-│   └── 14_baseline_transition_intensities.csv
-│
-├── Figures/
-│   ├── trace_density.pdf
-│   ├── gelman_plots.pdf
-│   └── multistate_HR_forest_plot.png
-│
-└── Simulation/
-    ├── simulation_results.csv
-    ├── simulation_summary.csv
-    ├── joint_convergence_N500.csv
-    ├── longitudinal_simulation_results/
-    └── multistate_simulation_results_moderate/
+└── ERP-Additional-Materials/
+    │
+    ├── Code/
+    │   ├── data_preprocessing.R
+    │   ├── ELSA_joint_model application.R
+    │   ├── longitudinal.R
+    │   ├── multistate_simulation_moderate_complete.R
+    │   └── simulation_study.R
+    │
+    ├── Results/
+    │   ├── 00_observed_transition_counts.csv
+    │   ├── 01_subject_baseline_covariates_8cov.csv
+    │   ├── 02_transition_retention_check.csv
+    │   ├── 03_covariate_centering_constants.csv
+    │   ├── 04_longitudinal_model_data.csv
+    │   ├── 05_longitudinal_subject_audit.csv
+    │   ├── 06_crude_transition_rates.csv
+    │   ├── 07_convergence_Rhat_ESS.csv
+    │   ├── 10_longitudinal_core_results.csv
+    │   ├── 11_longitudinal_8cov_results.csv
+    │   ├── 12_multistate_8cov_HR_results.csv
+    │   ├── 13_joint_association_alpha_results.csv
+    │   └── 14_baseline_transition_intensities.csv
+    │
+    ├── Figures/
+    │   ├── trace_density.pdf
+    │   ├── gelman_plots.pdf
+    │   └── multistate_HR_forest_plot.png
+    │
+    └── Simulation/
+        ├── simulation_results.csv
+        ├── simulation_summary.csv
+        ├── joint_convergence_N500.csv
+        ├── longitudinal_simulation_results/
+        └── multistate_simulation_results_moderate/
 ```
 
-The numbering of files in the `Results/` directory follows the numbering used in the original analysis pipeline. Intermediate files that are not required for interpretation or reproduction of the reported results are not included.
+The numbering of files in the `Results/` directory follows the numbering used in the original analysis pipeline. Intermediate files that are not required for interpretation or verification of the reported results are not included.
 
 ---
 
@@ -76,7 +78,7 @@ The main R packages used across the scripts include:
 * `survival`
 * `survminer`
 
-A separate installation of **JAGS** is required for the Bayesian analyses because `rjags` provides the interface between R and JAGS.
+A separate installation of **JAGS** is required because `rjags` provides the interface between R and JAGS.
 
 Some scripts check for missing R packages and install them automatically. JAGS itself must be installed separately.
 
@@ -84,7 +86,7 @@ Some scripts check for missing R packages and install them automatically. JAGS i
 
 ## 3. ELSA application
 
-The analysis jointly investigates longitudinal cognitive performance and transitions between frailty states.
+The empirical analysis jointly investigates longitudinal cognitive performance and transitions between frailty states.
 
 ### Longitudinal outcome
 
@@ -138,7 +140,7 @@ The final joint model includes the following eight baseline covariates:
 
 Repeated delayed recall measurements are modelled longitudinally rather than being included as a baseline covariate in the multi-state component.
 
-The two processes are linked through transition-specific shared random effects representing the subject-specific cognitive level and rate of change.
+The longitudinal and multi-state processes are linked through transition-specific shared random effects representing subject-specific cognitive level and rate of change.
 
 ---
 
@@ -151,7 +153,7 @@ Researchers wishing to reproduce the empirical analysis should first obtain auth
 The data preprocessing workflow is implemented in:
 
 ```text
-Code/data_preprocessing.R
+ERP-Additional-Materials/Code/data_preprocessing.R
 ```
 
 The script currently expects a local Stata dataset named:
@@ -173,7 +175,7 @@ The preprocessing script performs the main data preparation steps required for t
 7. identifying and auditing ambiguous same-year death and frailty observations;
 8. constructing multi-state transition intervals;
 9. preparing baseline covariates; and
-10. generating the datasets used for joint-model estimation.
+10. generating the datasets required for joint-model estimation.
 
 ### Treatment of mortality information
 
@@ -185,7 +187,7 @@ raxyear
 
 This records the **year of death rather than an exact date of death**.
 
-Therefore, the preprocessing procedure does not treat the recorded year as an exact event time. In particular, frailty and mortality observations occurring within the same year are treated as potentially ambiguous rather than imposing an artificial ordering.
+Therefore, the preprocessing procedure does not treat the recorded year as an exact event time. Frailty and mortality observations occurring within the same year are treated as potentially ambiguous rather than imposing an artificial within-year ordering.
 
 ---
 
@@ -198,9 +200,9 @@ The final empirical fitting script expects the following two processed datasets:
 19_ELSA_JOINT_MULTISTATE_TRANSITIONS.csv
 ```
 
-These files are produced as part of the ELSA data-processing workflow and contain participant-level information. They are not included in this public repository.
+These files are generated by the ELSA preprocessing workflow and contain participant-level information required to refit the final joint model. They are not included in this public repository.
 
-After obtaining authorised access to the underlying ELSA data, the supplied preprocessing code can be used to reconstruct the analysis datasets.
+After obtaining authorised access to the underlying ELSA data, the supplied preprocessing code can be used to reconstruct the required analysis datasets.
 
 ---
 
@@ -209,7 +211,7 @@ After obtaining authorised access to the underlying ELSA data, the supplied prep
 The main empirical analysis is implemented in:
 
 ```text
-Code/ELSA_joint_model application.R
+ERP-Additional-Materials/Code/ELSA_joint_model application.R
 ```
 
 This script fits the four-state Bayesian joint longitudinal and multi-state model.
@@ -223,6 +225,8 @@ The longitudinal component is a linear mixed-effects model with:
 The multi-state component contains transition-specific baseline intensities and transition-specific covariate effects.
 
 The longitudinal and multi-state components are linked through shared random effects. For each transition, separate association parameters link the subject-specific longitudinal random intercept and random slope to the corresponding transition intensity.
+
+The JAGS model specification for the empirical analysis is embedded directly within the R script.
 
 ### Final MCMC settings
 
@@ -243,7 +247,9 @@ The random seed is:
 20260903
 ```
 
-The full model is computationally intensive. The script also contains a smaller `TEST` mode for checking whether the model compilation, burn-in, sampling, saving, and summarisation workflow operates correctly. Results from the `TEST` mode should not be used for substantive inference.
+The full model is computationally intensive. The script also contains a smaller `TEST` mode for checking whether model compilation, burn-in, sampling, saving, and summarisation operate correctly.
+
+Results from the `TEST` mode should not be used for substantive inference.
 
 ---
 
@@ -253,10 +259,10 @@ The repository contains three main simulation components.
 
 ### 7.1 Joint-model simulation
 
-The principal simulation study is implemented in:
+The principal joint-model simulation is implemented in:
 
 ```text
-Code/simulation_study.R
+ERP-Additional-Materials/Code/simulation_study.R
 ```
 
 The study uses:
@@ -316,12 +322,14 @@ The simulation evaluates parameter recovery using quantities including:
 * root mean squared error (RMSE); and
 * empirical coverage probability of 95% credible intervals.
 
+The JAGS shared-random-effects model specification is embedded within `simulation_study.R`.
+
 The replication-level and summary outputs are provided in:
 
 ```text
-Simulation/simulation_results.csv
-Simulation/simulation_summary.csv
-Simulation/joint_convergence_N500.csv
+ERP-Additional-Materials/Simulation/simulation_results.csv
+ERP-Additional-Materials/Simulation/simulation_summary.csv
+ERP-Additional-Materials/Simulation/joint_convergence_N500.csv
 ```
 
 ---
@@ -331,7 +339,7 @@ Simulation/joint_convergence_N500.csv
 The standalone longitudinal simulation is implemented in:
 
 ```text
-Code/longitudinal.R
+ERP-Additional-Materials/Code/longitudinal.R
 ```
 
 This examines the Bayesian longitudinal random-intercept and random-slope model separately.
@@ -347,7 +355,7 @@ Repeated measurements:  8
 The corresponding outputs are stored in:
 
 ```text
-Simulation/longitudinal_simulation_results/
+ERP-Additional-Materials/Simulation/longitudinal_simulation_results/
 ```
 
 ---
@@ -357,7 +365,7 @@ Simulation/longitudinal_simulation_results/
 The standalone multi-state simulation is implemented in:
 
 ```text
-Code/multistate_simulation_moderate_complete.R
+ERP-Additional-Materials/Code/multistate_simulation_moderate_complete.R
 ```
 
 This simulation considers a three-state transition structure:
@@ -370,12 +378,12 @@ This simulation considers a three-state transition structure:
 
 The data-generating mechanism includes shared random-intercept and random-slope effects, while the fitted conventional multi-state model deliberately omits these shared random effects.
 
-The simulation therefore provides a comparison with the joint modelling framework under a moderate shared-random-effects data-generating mechanism.
+The simulation therefore provides a component-specific assessment of the conventional multi-state model under a moderate shared-random-effects data-generating mechanism.
 
 The corresponding outputs are stored in:
 
 ```text
-Simulation/multistate_simulation_results_moderate/
+ERP-Additional-Materials/Simulation/multistate_simulation_results_moderate/
 ```
 
 ---
@@ -396,7 +404,7 @@ contains observed counts for the retained multi-state transitions.
 01_subject_baseline_covariates_8cov.csv
 ```
 
-contains the baseline covariate information used for the eight-covariate joint analysis.
+contains baseline covariate information used in the eight-covariate joint analysis.
 
 ```text
 02_transition_retention_check.csv
@@ -414,7 +422,7 @@ contains the centring constants applied to continuous covariates.
 04_longitudinal_model_data.csv
 ```
 
-contains the prepared longitudinal model data used in the empirical analysis.
+contains prepared longitudinal information used to verify the empirical analysis.
 
 ```text
 05_longitudinal_subject_audit.csv
@@ -514,7 +522,7 @@ Obtain authorised access to the ELSA data required for the empirical application
 
 ### Step 2 — Prepare the ELSA analysis datasets
 
-Place the source dataset in the working directory and run:
+Move to the `ERP-Additional-Materials/` directory, place the authorised source dataset in the expected location, and run:
 
 ```r
 source("Code/data_preprocessing.R")
@@ -570,6 +578,7 @@ Compare the resulting estimates with:
 ```text
 Simulation/simulation_results.csv
 Simulation/simulation_summary.csv
+Simulation/joint_convergence_N500.csv
 ```
 
 ### Step 6 — Run the component simulations
@@ -592,7 +601,7 @@ Their outputs can be compared with the corresponding subdirectories within `Simu
 
 ## 12. Interpretation of the supplied materials
 
-The supplied outputs are intended to make it possible to verify whether the analyses have been reproduced successfully.
+The supplied outputs are intended to allow researchers to verify whether the analyses have been reproduced successfully.
 
 For the Bayesian analyses, exact equality of individual MCMC draws is not necessary for substantive replication. Posterior summaries, credible intervals, convergence measures, and substantive conclusions should nevertheless be comparable when the same data, model specification, priors, random seeds, and MCMC settings are used.
 
@@ -623,7 +632,7 @@ The repository provides:
 
 * ELSA data preprocessing code;
 * the final four-state Bayesian joint-model application;
-* the JAGS shared-random-effects model specification;
+* embedded JAGS shared-random-effects model specifications;
 * longitudinal, multi-state, and joint-model simulation code;
 * simulation replication and summary results;
 * processed-data audit outputs;
@@ -633,4 +642,4 @@ The repository provides:
 * MCMC convergence diagnostics; and
 * major graphical outputs.
 
-The original ELSA data and participant-level model input datasets are not publicly redistributed because they are subject to the relevant data-access conditions.
+The original ELSA source data and the two primary participant-level datasets required to refit the final joint model are not publicly redistributed because they are subject to the relevant data-access conditions.
